@@ -1,0 +1,284 @@
+/*---Matrix Chain---*/
+ *, *:before, *:after {
+}
+* {margin:0;padding:0;border:0 none; position: relative;}
+html {
+  background: #000;
+  box-sizing: border-box;
+  height: 100vh;
+}
+article {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+  top:0; left:0;
+  overflow: hidden;
+  animation: blur 11s infinite;
+}
+@keyframes blur {
+  23% {filter: url(#none);}
+  24% {filter: url(#svg-blur-h);}
+  25% {filter: url(#none);}
+  26% {filter: url(#svg-blur-h);}
+  27% {filter: url(#none);}
+  28% {filter: url(#svg-blur-h);}
+  35% {filter: url(#none);}
+  80% {filter: url(#none);}
+  81% {filter: url(#svg-blur-v);}
+  87% {filter: url(#none);}
+  88% {filter: url(#svg-blur-v);}
+  89% {filter: url(#none);}
+}
+prem {
+  color: #80FF00;
+  text-shadow: 0 0 2px #60F000, 1px -1px 2px #60F000;
+  font-weight: 400;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: .3rem;
+  word-spacing: 1rem;
+
+  writing-mode: vertical-rl;
+  -webkit-text-orientation: upright;
+  -moz-text-orientation: upright;
+ text-orientation: upright;
+  transform: translatey(-100%);
+  animation: matrix linear 30s infinite;
+}
+@keyframes matrix {
+  100% {
+    transform: translatey(100%);
+  }
+}
+prem:nth-child(3n+1) {
+  animation-delay: 1s;
+  animation-duration: 12s;
+}
+prem:nth-child(3n+2) {
+  animation-delay: 1.33s;
+  animation-duration: 43s;
+}
+prem:nth-child(3n+3) {
+  animation-delay: -1s;
+  animation-duration: 20s;
+}
+prem:nth-child(4n) {
+  animation-delay: -2s;
+  animation-duration: 33s;
+}
+
+.hide {
+  position: absolute;
+  height: 0; width: 0;
+  overflow: 0;
+  left: -100%;
+}
+/*---Useless Aviso---*/
+.aviso {
+  align-content: center;
+  background: transparent;
+  color: #fff;
+  font-size: 60px;
+  font-weight: bold;
+}
+.aviso a {
+  text-decoration: none;
+  color: #000;
+}
+
+/*---Kukuri---*/
+.link--kukuri {
+  text-transform: uppercase;
+  overflow: hidden;
+  font-family:"Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:bold;
+  margin-bottom:15vh;
+  margin-top:0;
+  color: #fff;
+  white-space: nowrap;
+  font-size: 4vw;
+}
+
+.link--kukuri:hover {
+  font-size: 5vw;
+  color: #fff;
+}
+
+.link--kukuri::before {
+  content: attr(data-letters);
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+  color: #3498db;
+  white-space: nowrap;
+  width: 0%;
+  transition: width 0.4s 0.3s;
+}
+
+.link--kukuri:hover::before {
+  width: 100%;
+}
+/*---fancy button---*/
+@keyframes sheen {
+  0% {
+    transform: skewY(-45deg) translateX(0);
+  }
+  100% {
+    transform: skewY(-45deg) translateX(12.5em);
+  }
+}
+.wrapper {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button {
+  padding: 0.75vw 2vw;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  border: 2px solid #2194E0;
+  font-size: 24px;
+  display: inline-block;
+  border-radius: 0.3em;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+.button:before {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  width: 3em;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -4.5em;
+  transform: skewX(-45deg) translateX(0);
+  transition: none;
+}
+.button:hover {
+  background-color: rgba(33, 148, 224, 0.77); 
+  color: #fff;
+}
+.button:hover:before {
+  transform: skewX(-45deg) translateX(40.5em);
+  transition: all 0.5s ease-in-out;
+}
+
+
+/*---textswap---*/
+/* .textswap */
+
+.textswap {
+    display: inline-block;
+    position: relative;
+    margin: 1em;
+    padding: 0.67em;
+    overflow: hidden;
+    text-decoration: none;
+    font-size: 3.5vw;
+    outline: none;
+    color: #fff;
+    background: transparent;
+    font-family: 'raleway', sans-serif;
+}
+
+.textswap span {
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -o-transition: 0.6s;
+    transition: 0.6s;
+    -webkit-transition-delay: 0.2s;
+    -moz-transition-delay: 0.2s;
+    -o-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.textswap:before,
+.textswap:after {
+    content: '';
+    position: absolute;
+    top: 0.67em;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    -webkit-transition: .4s,opacity .6s;
+    -moz-transition: .4s,opacity .6s;
+    -o-transition: .4s,opacity .6s;
+    transition: .4s,opacity .6s;
+}
+
+/* :before */
+
+.textswap:before {
+    content: attr(data-hover);
+    -webkit-transform: translate(-150%,0);
+    -moz-transform: translate(-150%,0);
+    -ms-transform: translate(-150%,0);
+    -o-transform: translate(-150%,0);
+    transform: translate(-150%,0);
+}
+
+/* :after */
+
+.textswap:after {
+    content: attr(data-active);
+    -webkit-transform: translate(150%,0);
+    -moz-transform: translate(150%,0);
+    -ms-transform: translate(150%,0);
+    -o-transform: translate(150%,0);
+    transform: translate(150%,0);
+}
+
+/* Span on :hover and :active */
+
+.textswap:hover span,
+.textswap:active span {
+    opacity: 0;
+    -webkit-transform: scale(0.3);
+    -moz-transform: scale(0.3);
+    -ms-transform: scale(0.3);
+    -o-transform: scale(0.3);
+    transform: scale(0.3);
+}
+
+/*  
+    We show :before pseudo-element on :hover 
+    and :after pseudo-element on :active 
+*/
+
+.textswap:hover:before,
+.textswap:active:after {
+    opacity: 1;
+    -webkit-transform: translate(0,0);
+    -moz-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+    -webkit-transition-delay: .4s;
+    -moz-transition-delay: .4s;
+    -o-transition-delay: .4s;
+    transition-delay: .4s;
+}
+
+/* 
+  We hide :before pseudo-element on :active
+*/
+
+.textswap:active:before {
+    -webkit-transform: translate(-150%,0);
+    -moz-transform: translate(-150%,0);
+    -ms-transform: translate(-150%,0);
+    -o-transform: translate(-150%,0);
+    transform: translate(-150%,0);
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Attempt to make brick break inside a js canvas</title>
+    <h1 align="center">Attempt to make brick break inside a js canvas</h1>
+    <style>
+        * { padding: 0; margin: 0; }
+        canvas { background: #3498DB; display: block; margin: 0 auto; }
+
+    </style>
+    <input type="button" value="Test" onclick="draw();">
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="320"></canvas>
+
+<script>
+//create the canvas
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+// coordinates inside the canvas
+var x = canvas.width/2;
+var y = canvas.height/2;
+
+
+
+// properties of the bumper
+var bumperHeight = 10;
+var bumperWidth = 75;
+var bumperL = (canvas.width-bumperWidth)/2;
+
+
+//
+function drawBumper() {
+    ctx.beginPath();
+    ctx.rect(bumperL, canvas.height-bumperHeight, bumperWidth, bumperHeight);
+    ctx.fillStyle = "black";
+    ctx.fill();
+    ctx.closePath();
+}
+//mouse stuff
+var rightPressed = false;
+var leftPressed = false;
+
+//speed and direction the ball is traveling
+var nx = 5;
+var ny = -5;
+//properties of the ball
+var bradius = 10;
+
+//draws the ball every 10 miliseconds
+function draw() {
+    //erase the old ball
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //draw the ball
+    ctx.beginPath();
+    ctx.arc(x, y, bradius, 0, Math.PI*2);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+
+    //make it look like the ball is moving
+    x+=nx;
+    y+=ny;
+
+    //left or right
+    if(x + nx > canvas.width-bradius || x + nx < bradius) {
+        nx = -nx;
+    }
+
+    //adds the position until it falls down
+    if (y + ny  < bradius) {
+        ny = -ny;
+        //before it hits the bottom
+    } else if (y + ny > canvas.height-bradius) {
+        //makes it hit the bumper (left to right)
+        if (x > bumperL-20 && x < bumperL + bumperWidth+20) {
+            ny = -ny;
+        } else {
+            alert("YOU SUCK LOL");
+            document.location.reload();
+        }
+    }
+    //control the bumper
+    if(rightPressed && bumperL < canvas.width-bumperWidth) {
+        bumperL += 7;
+    }
+    else if(leftPressed && bumperL > 0) {
+        bumperL -= 7;
+    }
+    drawBumper();
+
+requestAnimationFrame(draw);
+}
+
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+//checks if the keys/mouse is clicked or not
+function keyDownHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = true;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = false;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = false;
+    }
+}
+function mouseMoveHandler(e) {
+    var mouseThing = e.clientX - canvas.offsetLeft;
+    if(mouseThing > 0 && mouseThing < canvas.width) {
+        bumperL = mouseThing - bumperWidth/2;
+    }
+}
+
+
+//draw();
+
+
+
+
+</script>
+
+</body>
+</html>
